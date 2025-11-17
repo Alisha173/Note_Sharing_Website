@@ -29,7 +29,7 @@ function Login({ onLogin }) {
   };
 
   return (
-    <div className="container mt-5" style={{ maxWidth: "400px" }}>
+    <div className="container mt-5 auth-container" style={{ maxWidth: "400px" }}>
       <h2 className="text-center mb-4">Login</h2>
 
       <input

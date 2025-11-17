@@ -33,7 +33,7 @@ function Signup({ onSignupSuccess }) {
   };
 
   return (
-    <div className="container mt-5" style={{ maxWidth: "400px" }}>
+    <div className="container mt-5 auth-container" style={{ maxWidth: "400px" }}>
       <h2 className="text-center mb-4">Signup</h2>
 
       <input
@@ -52,7 +52,7 @@ function Signup({ onSignupSuccess }) {
         onChange={(e) => setPassword(e.target.value)}
       />
 
-      <button className="btn btn-success w-100" onClick={handleSignup}>
+      <button className="btn btn-primary w-100" onClick={handleSignup}>
         Signup
       </button>
 
