@@ -18,36 +18,37 @@ function App() {
   };
 
   return (
-    /* Updated Background Color to #37353E */
-    <div className="container-fluid py-5" style={{ minHeight: "100vh", backgroundColor: "#37353E" }}>
+    <div className="container-fluid py-4" style={{ height: "100vh", backgroundColor: "#282422" }}>
       {!token ? (
-        <div className="d-flex justify-content-center">
+        <div className="d-flex justify-content-center align-items-center h-100">
           {showSignup ? (
             <div style={{ width: "100%", maxWidth: "400px" }}>
                <Signup onSignupSuccess={() => setShowSignup(false)} />
                <p className="text-center mt-3">
-                 Already have an account? <button className="btn btn-link" onClick={() => setShowSignup(false)}>Login</button>
+                 Already have an account? <button className="btn btn-link text-warning" onClick={() => setShowSignup(false)}>Login</button>
                </p>
             </div>
           ) : (
             <div style={{ width: "100%", maxWidth: "400px" }}>
               <Login onLogin={setToken} />
               <p className="text-center mt-3">
-                Don’t have an account? <button className="btn btn-link" onClick={() => setShowSignup(true)}>Signup</button>
+                Don’t have an account? <button className="btn btn-link text-warning" onClick={() => setShowSignup(true)}>Signup</button>
               </p>
             </div>
           )}
         </div>
       ) : (
-        <div className="container">
-          <div className="d-flex justify-content-between align-items-center mb-4">
-            {/* Updated Text Color to #D3DAD9 */}
-            <h2 style={{ color: "#D3DAD9" }}>Welcome Back!</h2>
+        <div className="container h-100 d-flex flex-column">
+          <div className="d-flex justify-content-between align-items-center mb-3 flex-shrink-0">
+            <h2 style={{ color: "#D8C3A5" }}>Welcome Back!</h2>
             <button className="btn btn-danger" onClick={handleLogout}>Logout</button>
           </div>
-          {/* Updated Divider Color to #715A5A */}
-          <hr style={{ borderColor: "#715A5A" }} />
-          <Notes />
+          <hr style={{ borderColor: "#555" }} className="flex-shrink-0" />
+          
+          {/* Pass remaining height control to Notes */}
+          <div className="flex-grow-1" style={{ overflow: "hidden" }}>
+            <Notes />
+          </div>
         </div>
       )}
     </div>

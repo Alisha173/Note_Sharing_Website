@@ -76,14 +76,36 @@ function Notes() {
   };
 
   return (
-    <div className="row">
+    <div className="row h-100">
       {/* LEFT COLUMN: Create/Edit Form */}
-      <div className="col-md-4 col-lg-3 mb-4">
-        <div className="card p-4 create-note-container sticky-top" style={{ top: "20px", zIndex: 1 }}>
+      <div className="col-md-4 col-lg-3 mb-4 h-100">
+        <div className="card p-4 create-note-container">
           <h4 className="text-center mb-4">{isEditing ? "Edit Note" : "New Note"}</h4>
-          <input type="text" className="form-control mb-3" placeholder="Title" value={title} onChange={(e) => setTitle(e.target.value)} />
-          <input type="text" className="form-control mb-3" placeholder="Subject" value={subject} onChange={(e) => setSubject(e.target.value)} />
-          <textarea className="form-control mb-4" rows="6" placeholder="Type your content here..." value={content} onChange={(e) => setContent(e.target.value)} />
+          
+          <input 
+            type="text" 
+            className="form-control mb-3" 
+            placeholder="Title" 
+            value={title} 
+            onChange={(e) => setTitle(e.target.value)} 
+          />
+          
+          <input 
+            type="text" 
+            className="form-control mb-3" 
+            placeholder="Subject" 
+            value={subject} 
+            onChange={(e) => setSubject(e.target.value)} 
+          />
+          
+          {/* Textarea grows to fill empty space */}
+          <textarea 
+            className="form-control mb-4" 
+            placeholder="Type your content here..." 
+            value={content} 
+            onChange={(e) => setContent(e.target.value)}
+            style={{ flexGrow: 1, resize: "none" }} 
+          />
           
           {isEditing ? (
             <button className="btn btn-warning w-100" onClick={updateNote}>Save Changes</button>
@@ -102,8 +124,7 @@ function Notes() {
       {/* RIGHT COLUMN: Notes List */}
       <div className="col-md-8 col-lg-9">
         <div className="notes-scroll-container p-3">
-            {/* Updated Header Color */}
-            <h3 className="mb-4 sticky-header" style={{ color: "#D3DAD9" }}>Your Notes</h3>
+            <h3 className="mb-4 sticky-header" style={{ color: "#D8C3A5" }}>All Notes</h3>
             
             {notes.length === 0 ? (
                 <p className="text-muted">No notes yet. Create one from the left panel!</p>
@@ -114,8 +135,7 @@ function Notes() {
                     <div className="card p-3 note-card w-100 d-flex flex-column">
                         <h5 className="card-title text-truncate" title={note.title}>{note.title}</h5>
                         <small className="card-subtitle mb-2 text-muted">{note.subject}</small>
-                        {/* Updated Line Color to Mauve */}
-                        <hr style={{ borderColor: "#715A5A", margin: "8px 0" }}/>
+                        <hr style={{ borderColor: "#ccc", margin: "8px 0" }}/>
                         <p className="card-text mt-2 flex-grow-1" style={{ whiteSpace: "pre-wrap", maxHeight: "150px", overflow: "hidden", textOverflow: "ellipsis" }}>
                            {note.content}
                         </p>

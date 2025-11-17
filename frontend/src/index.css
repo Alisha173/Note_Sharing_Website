@@ -1,62 +1,72 @@
 body {
   margin: 0;
-  /* Main Background: Dark Greyish Purple */
-  background-color: #37353E !important; 
-  color: #D3DAD9 !important; /* Light Text */
+  background-color: #282422 !important; 
+  color: #D8C3A5 !important; 
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  min-height: 100vh;
-  overflow-x: hidden;
+  height: 100vh;
+  overflow: hidden; 
 }
 
 #root {
-  min-height: 100vh;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  height: 100vh;
 }
 
 /* --- Layout & Scroll Styling --- */
 
-.notes-scroll-container {
-    border: 2px solid #715A5A; /* Muted Mauve Border */
-    border-radius: 8px;
-    background-color: #44444E; /* Secondary Dark Background */
-    height: 85vh;
-    overflow-y: auto;
-    position: relative;
+/* Shared Height Calculation for both panels */
+/* 100vh (screen) - 220px (header + margins) */
+.notes-scroll-container, .create-note-container {
+    height: calc(100vh - 220px); 
 }
 
-/* Custom Scrollbar */
+.notes-scroll-container {
+    border: 2px solid #555;
+    border-radius: 8px;
+    background-color: #2c2826;
+    overflow-y: auto; /* Scrollable */
+    position: relative;
+    padding-right: 5px;
+}
+
+.create-note-container {
+    background-color: #3e3a38 !important;
+    color: #D8C3A5 !important;
+    border: 1px solid #555;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    border-radius: 8px;
+    
+    /* Flexbox to stretch the textarea */
+    display: flex;
+    flex-direction: column;
+}
+
+/* Scrollbar Styling */
 .notes-scroll-container::-webkit-scrollbar {
-    width: 10px;
+    width: 8px;
 }
 
 .notes-scroll-container::-webkit-scrollbar-track {
-    background: #37353E; 
+    background: #282422; 
 }
 
 .notes-scroll-container::-webkit-scrollbar-thumb {
-    background-color: #715A5A; 
-    border-radius: 5px;
-    border: 2px solid #37353E;
+    background-color: #555; 
+    border-radius: 4px;
 }
 
 .notes-scroll-container::-webkit-scrollbar-thumb:hover {
-    background-color: #D3DAD9; 
+    background-color: #D8C3A5; 
 }
 
 /* --- Card & Form Styling --- */
 
-/* Note Cards: Light Background */
 .card.note-card {
-    background-color: #D3DAD9 !important; 
-    color: #37353E !important; /* Dark Text for Contrast */
+    background-color: #F5EBE0 !important; 
+    color: #282422 !important;
     border: none;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     transition: transform 0.2s;
@@ -68,81 +78,58 @@ code {
 }
 
 .card.note-card .text-muted {
-    color: #715A5A !important; /* Mauve for subtitles */
+    color: #6b6a68 !important;
 }
 
-/* Create Note Form Container: Secondary Dark */
-.create-note-container {
-    background-color: #44444E !important;
-    color: #D3DAD9 !important;
-    border: 1px solid #715A5A;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-}
-
-/* Inputs */
 .form-control {
-    background-color: #37353E !important; /* Darkest background for inputs */
-    border: 1px solid #715A5A !important;
-    color: #D3DAD9 !important;
+    background-color: #282422 !important;
+    border: 1px solid #555 !important;
+    color: #D8C3A5 !important;
 }
 
 .form-control::placeholder {
-    color: #8b8b96 !important;
+    color: #8E8D8A !important;
 }
 
 .form-control:focus {
-    background-color: #37353E !important;
-    color: #D3DAD9 !important;
-    border-color: #D3DAD9 !important;
-    box-shadow: 0 0 0 0.25rem rgba(113, 90, 90, 0.5) !important;
+    background-color: #282422 !important;
+    color: #D8C3A5 !important;
+    border-color: #D8C3A5 !important;
+    box-shadow: 0 0 0 0.25rem rgba(216, 195, 165, 0.25) !important;
 }
 
 /* Buttons */
-.btn-primary { /* Main Action: Mauve */
-    background-color: #715A5A !important;
-    border-color: #715A5A !important;
-    color: #D3DAD9 !important;
+.btn-primary {
+    background-color: #D8C3A5 !important;
+    border-color: #D8C3A5 !important;
+    color: #282422 !important;
     font-weight: bold;
 }
 .btn-primary:hover {
-    background-color: #5e4a4a !important;
-    border-color: #5e4a4a !important;
+    background-color: #c9b48e !important;
+    border-color: #c9b48e !important;
 }
 
-.btn-warning { /* Save Changes */
-    background-color: #D3DAD9 !important;
-    border-color: #D3DAD9 !important;
-    color: #37353E !important;
-}
-.btn-warning:hover {
-    background-color: #bfbfbf !important;
+.btn-warning {
+    background-color: #F5EBE0 !important;
+    border-color: #F5EBE0 !important;
+    color: #282422 !important;
 }
 
-.btn-danger { /* Delete */
-    background-color: #8B3A3A !important; /* Kept a standard red for danger, slightly muted */
-    border-color: #8B3A3A !important;
+.btn-danger {
+    background-color: #a83a3a !important;
+    border-color: #a83a3a !important;
+}
+.btn-secondary {
+    background-color: #555 !important;
+    border-color: #555 !important;
 }
 
-.btn-secondary { /* Edit Button on Card */
-    background-color: #44444E !important;
-    border-color: #44444E !important;
-    color: #D3DAD9 !important;
-}
-.btn-secondary:hover {
-    background-color: #37353E !important;
-}
-
-.btn-outline-light { /* Cancel Edit */
-    border-color: #D3DAD9 !important;
-    color: #D3DAD9 !important;
+.btn-outline-light {
+    border-color: #D8C3A5 !important;
+    color: #D8C3A5 !important;
 }
 .btn-outline-light:hover {
-    background-color: #D3DAD9 !important;
-    color: #37353E !important;
-}
-
-/* Links */
-.btn-link {
-    color: #D3DAD9 !important;
-    text-decoration: underline;
+    background-color: #D8C3A5 !important;
+    color: #282422 !important;
 }
