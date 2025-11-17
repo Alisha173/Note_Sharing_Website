@@ -125,85 +125,75 @@ function Notes() {
 
   return (
     <div>
-      <h3>Your Notes</h3>
-
-      {/* CREATE NOTE FORM */}
-      <div style={{ marginBottom: "20px" }}>
+     <div className="card p-3 mb-4">
         <h4>Create New Note</h4>
 
         <input
           type="text"
+          className="form-control mb-2"
           placeholder="Title"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          style={{ display: "block", marginBottom: "8px" }}
         />
 
         <input
           type="text"
+          className="form-control mb-2"
           placeholder="Subject"
           value={subject}
           onChange={(e) => setSubject(e.target.value)}
-          style={{ display: "block", marginBottom: "8px" }}
         />
 
         <textarea
+          className="form-control mb-2"
+          rows="3"
           placeholder="Content"
           value={content}
           onChange={(e) => setContent(e.target.value)}
-          rows="3"
-          style={{ display: "block", marginBottom: "8px", width: "250px" }}
         />
 
         {isEditing ? (
-            <button onClick={updateNote} style={{ backgroundColor: "orange" }}>
-                Save Changes
-            </button>
-            ) : (
-            <button onClick={createNote}>Add Note</button>
+          <button className="btn btn-warning" onClick={updateNote}>
+            Save Changes
+          </button>
+        ) : (
+          <button className="btn btn-primary" onClick={createNote}>
+            Add Note
+          </button>
         )}
-
       </div>
 
+
+      
+
+      
+      <h3>Your Notes</h3>
       {/* NOTES LIST */}
       {notes.length === 0 ? (
         <p>No notes found.</p>
       ) : (
         notes.map((note) => (
-          <div key={note.id} style={{ marginBottom: "20px" }}>
-            <b>{note.title}</b> — {note.subject}
-            <br />
-            {note.content}
-            <br />
+          <div key={note.id} className="card p-3 mb-3">
+            <h5>{note.title}</h5>
+            <small className="text-muted">{note.subject}</small>
+            <p className="mt-2">{note.content}</p>
+
             <button
-                onClick={() => startEdit(note)}
-                style={{
-                    marginRight: "10px",
-                    backgroundColor: "green",
-                    color: "white",
-                    border: "none",
-                    padding: "4px 8px",
-                    cursor: "pointer"
-                }}
+              className="btn btn-success btn-sm me-2"
+              onClick={() => startEdit(note)}
             >
-            Edit
+              Edit
             </button>
-            
+
             <button
+              className="btn btn-danger btn-sm"
               onClick={() => deleteNote(note.id)}
-              style={{
-                marginTop: "8px",
-                backgroundColor: "red",
-                color: "white",
-                border: "none",
-                padding: "4px 8px",
-                cursor: "pointer"
-              }}
             >
-            Delete
+              Delete
             </button>
-            <hr />
           </div>
+
+
         ))
       )}
     </div>

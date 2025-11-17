@@ -33,30 +33,33 @@ function Signup({ onSignupSuccess }) {
   };
 
   return (
-    <div>
-      <h2>Signup</h2>
+    <div className="container mt-5" style={{ maxWidth: "400px" }}>
+      <h2 className="text-center mb-4">Signup</h2>
 
       <input
         type="text"
+        className="form-control mb-3"
         placeholder="Email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
-        style={{ display: "block", marginBottom: "10px" }}
       />
 
       <input
         type="password"
+        className="form-control mb-3"
         placeholder="Password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
-        style={{ display: "block", marginBottom: "10px" }}
       />
 
-      <button onClick={handleSignup}>Signup</button>
+      <button className="btn btn-success w-100" onClick={handleSignup}>
+        Signup
+      </button>
 
-      <p>{message}</p>
+      <p className="text-center mt-3 text-danger">{message}</p>
     </div>
   );
+
 }
 
 export default Signup;
