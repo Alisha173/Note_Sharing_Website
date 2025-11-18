@@ -98,7 +98,6 @@ function Notes() {
             onChange={(e) => setSubject(e.target.value)} 
           />
           
-          {/* Textarea grows to fill empty space */}
           <textarea 
             className="form-control mb-4" 
             placeholder="Type your content here..." 
@@ -139,7 +138,15 @@ function Notes() {
                         <p className="card-text mt-2 flex-grow-1" style={{ whiteSpace: "pre-wrap", maxHeight: "150px", overflow: "hidden", textOverflow: "ellipsis" }}>
                            {note.content}
                         </p>
-                        <div className="mt-3 d-flex justify-content-between">
+                        
+                        {/* AUTHOR NAME DISPLAY */}
+                        {note.authorName && (
+                           <div className="text-end mb-2" style={{ fontSize: "0.85rem", fontStyle: "italic", opacity: 0.8 }}>
+                             - {note.authorName}
+                           </div>
+                        )}
+
+                        <div className="mt-1 d-flex justify-content-between">
                         <button className="btn btn-secondary btn-sm" onClick={() => startEdit(note)}>Edit</button>
                         <button className="btn btn-danger btn-sm" onClick={() => deleteNote(note.id)}>Delete</button>
                         </div>

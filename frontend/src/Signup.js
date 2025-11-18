@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 
 function Signup({ onSignupSuccess }) {
+  const [name, setName] = useState(""); // New State for Name
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
 
   const handleSignup = async () => {
-    if (!email || !password) {
-      setMessage("Email and password required");
+    if (!name || !email || !password) {
+      setMessage("All fields are required");
       return;
     }
 
@@ -17,12 +18,12 @@ function Signup({ onSignupSuccess }) {
         headers: {
           "Content-Type": "application/json"
         },
-        body: JSON.stringify({ email, password })
+        body: JSON.stringify({ name, email, password }) // Send Name
       });
 
       if (response.ok) {
         setMessage("Signup successful! You can now login.");
-        onSignupSuccess(); // move to login screen
+        onSignupSuccess(); 
       } else {
         const text = await response.text();
         setMessage(text);
@@ -35,6 +36,14 @@ function Signup({ onSignupSuccess }) {
   return (
     <div className="container mt-5 auth-container" style={{ maxWidth: "400px" }}>
       <h2 className="text-center mb-4">Signup</h2>
+
+      <input
+        type="text"
+        className="form-control mb-3"
+        placeholder="Full Name" 
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+      />
 
       <input
         type="text"
@@ -59,7 +68,6 @@ function Signup({ onSignupSuccess }) {
       <p className="text-center mt-3 text-danger">{message}</p>
     </div>
   );
-
 }
 
 export default Signup;

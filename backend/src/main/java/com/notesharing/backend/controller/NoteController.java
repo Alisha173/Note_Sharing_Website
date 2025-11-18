@@ -1,7 +1,10 @@
 package com.notesharing.backend.controller;
 
 import com.notesharing.backend.model.Note;
+import com.notesharing.backend.model.User;
 import com.notesharing.backend.repository.NoteRepository;
+import com.notesharing.backend.repository.UserRepository;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,9 +15,11 @@ import java.util.List;
 public class NoteController {
 
     private final NoteRepository repo;
+    private final UserRepository userRepo; // Add User Repo
 
-    public NoteController(NoteRepository repo) {
+    public NoteController(NoteRepository repo, UserRepository userRepo) {
         this.repo = repo;
+        this.userRepo = userRepo;
     }
 
     @GetMapping
@@ -29,6 +34,17 @@ public class NoteController {
 
     @PostMapping
     public Note create(@RequestBody Note note) {
+        // 1. Get the email of the currently logged-in user
+        String email = SecurityContextHolder.getContext().getAuthentication().getName();
+
+        // 2. Find the user details (specifically the name)
+        User user = userRepo.findByEmail(email);
+
+        // 3. Set the author name on the note
+        if (user != null) {
+            note.setAuthorName(user.getName());
+        }
+
         return repo.save(note);
     }
 
@@ -38,6 +54,7 @@ public class NoteController {
             existing.setTitle(updated.getTitle());
             existing.setContent(updated.getContent());
             existing.setSubject(updated.getSubject());
+            // We don't update authorName here to preserve original author
             return repo.save(existing);
         }).orElse(null);
     }
