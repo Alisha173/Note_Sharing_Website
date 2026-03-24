@@ -19,7 +19,7 @@ public class Note {
 
     private String subject;
 
-    // New field to store the author's name
+    
     private String authorName;
 
     private LocalDateTime createdAt = LocalDateTime.now();

@@ -126,7 +126,7 @@ function Notes() {
             <h3 className="mb-4 sticky-header" style={{ color: "#D8C3A5" }}>All Notes</h3>
             
             {notes.length === 0 ? (
-                <p className="text-muted">No notes yet. Create one from the left panel!</p>
+                <p className="text-muted">No notes yet. Kindly create one from the left panel!</p>
             ) : (
                 <div className="row">
                 {notes.map((note) => (
